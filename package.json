@@ -8,6 +8,7 @@
     "react-dom": "^16.8.6",
     "react-image-mapper": "0.0.14",
     "react-leaflet": "^2.3.0",
+    "react-moment": "^0.9.2",
     "react-scripts": "3.0.1"
   },
   "scripts": {

@@ -23,6 +23,7 @@ export default class App extends Component {
       ip: '',
       markers: [],
       ipRange: '172.21.9.0/22',
+      uptime: ''
     }
   }
 
@@ -68,6 +69,8 @@ export default class App extends Component {
 
         let positionX = 50;
 
+        console.log(response)
+
         for (const endpoint of response) {
           let exists = false;
           for (const { ip } of this.state.markers) {
@@ -79,7 +82,7 @@ export default class App extends Component {
 
           if (exists) { continue; }
 
-          markers.push({ name: endpoint.systemName, ip: endpoint.ip, position: [-5, positionX], alive: false });
+          markers.push({ name: endpoint.systemName, ip: endpoint.ip, position: [-5, positionX], alive: false, uptime: endpoint.uptime });
 
           positionX += 10;
         }
@@ -92,7 +95,7 @@ export default class App extends Component {
   addMarker = () => {
     const markers = [
       ...this.state.markers,
-      { name: this.state.name, ip: this.state.ip, position: [50, 50], alive: false },
+      { name: this.state.name, ip: this.state.ip, position: [50, 50], alive: false, uptime: this.state.uptime },
     ];
 
     this.setState({
@@ -100,6 +103,7 @@ export default class App extends Component {
       markers,
       name: '',
       ip: '',
+      uptime: ''
     });
 
     localStorage.setItem('markers', JSON.stringify(markers));
@@ -134,6 +138,7 @@ export default class App extends Component {
                 Name: {marker.name} <br/>
                 IP: <a href={`http://${marker.ip}`} target="_blank">{marker.ip}</a><br/>
                 Ping: {marker.ping} <br/>
+                UpTime: {marker.uptime} <br />
                 <a href="#" onClick={() => {
                   this.state.markers.splice(i, 1);
 

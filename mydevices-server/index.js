@@ -7,6 +7,7 @@ const DEVICE_TYPE = [1,3,6,1,2,1,1,1,0];
 const UPTIME = [1,3,6,1,2,1,1,3,0];
 const SYSTEM_NAME = [1,3,6,1,2,1,1,5,0];
 const SYSTEM_LOCATION = [1,3,6,1,2,1,1,6,0];
+const MAC_ADDRESS = [1,3,6,1,1,1,1,22]
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -42,7 +43,7 @@ app.get('/api/scan', (req, res) => {
                 community: 'public',
             });
         
-            session.getAll({ oids: [DEVICE_TYPE, UPTIME, SYSTEM_NAME, SYSTEM_LOCATION] }, function (error, varbinds) {
+            session.getAll({ oids: [DEVICE_TYPE, UPTIME, SYSTEM_NAME, SYSTEM_LOCATION, MAC_ADDRESS] }, function (error, varbinds) {
                 if (error) {
                     console.log('Fail :(');
                 } else {
@@ -51,6 +52,7 @@ app.get('/api/scan', (req, res) => {
                         uptime: varbinds[1].value,
                         systemName: varbinds[2].value,
                         systemLocation: varbinds[3].value,
+                        macAddress: varbinds[4].value,
                         ip: data.ip
                     })
                 }
