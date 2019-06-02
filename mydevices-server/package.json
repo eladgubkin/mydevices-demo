@@ -1,0 +1,17 @@
+{
+  "name": "mydevices-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "evilscan": "^1.7.5",
+    "express": "^4.17.1",
+    "ping": "^0.2.2",
+    "snmp-native": "^1.1.2"
+  }
+}
